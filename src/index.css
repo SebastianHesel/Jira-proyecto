@@ -1,0 +1,148 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * { box-sizing: border-box; }
+  body {
+    @apply text-gray-900 font-sans antialiased;
+    margin: 0;
+  }
+  #root { min-height: 100vh; }
+
+  ::-webkit-scrollbar { width: 4px; height: 4px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { @apply bg-gray-200 rounded-full; }
+  ::-webkit-scrollbar-thumb:hover { @apply bg-gray-300; }
+  .dark ::-webkit-scrollbar-thumb { background-color: #374151; }
+}
+
+@layer components {
+  /* ── Cards ────────────────────────────────────────────── */
+  .card {
+    @apply bg-white rounded-2xl border border-gray-100 transition-colors duration-200;
+    box-shadow: 0 1px 4px 0 rgb(0 0 0 / 0.05), 0 1px 2px 0 rgb(0 0 0 / 0.03);
+  }
+
+  /* ── Buttons ──────────────────────────────────────────── */
+  .btn {
+    @apply inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium
+           transition-all duration-150 disabled:opacity-40 disabled:cursor-not-allowed whitespace-nowrap;
+    outline: none;
+  }
+  .btn-primary {
+    @apply btn bg-primary-600 text-white hover:bg-primary-700;
+    box-shadow: 0 1px 3px 0 rgb(124 58 237 / 0.35);
+  }
+  .btn-secondary {
+    @apply btn bg-white text-gray-600 border border-gray-200 hover:bg-gray-50 hover:text-gray-800;
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  }
+  .btn-ghost {
+    @apply btn text-gray-500 hover:bg-gray-100 hover:text-gray-700;
+  }
+
+  /* ── Form Inputs ──────────────────────────────────────── */
+  .input {
+    @apply w-full px-3.5 py-2.5 rounded-xl border border-gray-200 text-sm text-gray-900
+           placeholder-gray-400 bg-white transition-all duration-150;
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.04);
+    outline: none;
+  }
+  .input:focus {
+    border-color: #a78bfa;
+    box-shadow: 0 0 0 3px rgb(139 92 246 / 0.15), 0 1px 2px 0 rgb(0 0 0 / 0.04);
+  }
+  .textarea { @apply input resize-none; }
+  .label {
+    @apply block text-[11px] font-bold uppercase tracking-widest text-gray-400 mb-1.5;
+  }
+
+  /* ── Badges ───────────────────────────────────────────── */
+  .badge {
+    @apply inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium;
+  }
+
+  /* ── Table ────────────────────────────────────────────── */
+  .table-th {
+    @apply px-4 py-3 text-left text-[11px] font-bold uppercase tracking-wider text-gray-400;
+  }
+  .table-td { @apply px-4 py-3.5; }
+}
+
+/* ── Structural layout (CSS-class-based so toggle works in dev + prod) ────── */
+.main-layout {
+  background-color: #f4f5f7;
+  transition: background-color 0.2s;
+}
+.dark .main-layout { background-color: #0d1117; }
+
+aside {
+  background-color: #ffffff;
+  border-right: 1px solid #f3f4f6;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+.dark aside {
+  background-color: #0f1421;
+  border-right-color: #1e2535;
+}
+
+header {
+  background-color: rgba(255, 255, 255, 0.8);
+  border-bottom: 1px solid rgba(229, 231, 235, 0.6);
+  transition: background-color 0.2s, border-color 0.2s;
+}
+.dark header {
+  background-color: rgba(15, 20, 33, 0.9);
+  border-bottom-color: #1e2535;
+}
+
+/* ── Dark mode overrides ────────────────────────────────── */
+.dark .card {
+  background-color: #161b27;
+  border-color: #1e2535;
+  box-shadow: 0 1px 4px 0 rgb(0 0 0 / 0.4), 0 1px 2px 0 rgb(0 0 0 / 0.3);
+}
+.dark .btn-secondary {
+  background-color: #1e2535;
+  border-color: #2d3548;
+  color: #cbd5e1;
+  box-shadow: none;
+}
+.dark .btn-secondary:hover {
+  background-color: #243044;
+  color: #e2e8f0;
+}
+.dark .btn-ghost {
+  color: #94a3b8;
+}
+.dark .btn-ghost:hover {
+  background-color: #1e2535;
+  color: #cbd5e1;
+}
+.dark .input {
+  background-color: #1e2535;
+  border-color: #2d3548;
+  color: #e2e8f0;
+  box-shadow: none;
+}
+.dark .input::placeholder { color: #475569; }
+.dark .input:focus {
+  border-color: #7c3aed;
+  box-shadow: 0 0 0 3px rgb(124 58 237 / 0.2);
+}
+.dark .label { color: #475569; }
+.dark .table-th { color: #475569; }
+.dark .table-td { color: #94a3b8; }
+
+/* ── Select option text (browser-native selects in dark mode) ─── */
+.dark .input option {
+  background-color: #1e2535;
+  color: #e2e8f0;
+}
+
+/* ── Transparent button reset (prevents browser default light bg) ─ */
+.dark button.bg-transparent {
+  background-color: transparent;
+}
+

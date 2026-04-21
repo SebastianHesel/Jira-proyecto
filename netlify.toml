@@ -1,0 +1,37 @@
+[build]
+  command   = "npm run build"
+  publish   = "dist"
+
+[functions]
+  directory    = "netlify/functions"
+  node_bundler = "esbuild"
+
+# ── API Proxies ────────────────────────────────────────────────────────────────
+# Netlify Functions replace the Vite dev-server proxy for all external APIs.
+# event.rawUrl gives the original request path inside each function.
+
+[[redirects]]
+  from   = "/api/jira/*"
+  to     = "/.netlify/functions/jira-proxy"
+  status = 200
+
+[[redirects]]
+  from   = "/api/anthropic/*"
+  to     = "/.netlify/functions/anthropic-proxy"
+  status = 200
+
+[[redirects]]
+  from   = "/api/twilio/*"
+  to     = "/.netlify/functions/twilio-proxy"
+  status = 200
+
+[[redirects]]
+  from   = "/api/meta/*"
+  to     = "/.netlify/functions/meta-proxy"
+  status = 200
+
+# ── SPA fallback: all routes → index.html (React Router) ──────────────────────
+[[redirects]]
+  from   = "/*"
+  to     = "/index.html"
+  status = 200
